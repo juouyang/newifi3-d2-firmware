@@ -75,10 +75,86 @@ insmod ./newifi-d2-jail-break.ko
 3. 我的custom OpenWrt固件
    <span style="color:fuchsia">`/openwrt-firmware/openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade_sawa_custom.bin`</span>
 
+   
+
+  完成。基本上OpenWrt現在就能用了。
+
 
 
 
 
 ## 三、自定義&編譯OpenWrt
 
-#### LuCi - Rosy theme
+有兩個版本可以選擇，其一是[OpenWrt 18.06](https://github.com/openwrt/openwrt/tree/openwrt-18.06)，另一個是[LEDE](https://github.com/lede-project/source)。
+
+我自己就選擇了用OpenWrt（LEDE是OpenWrt的分支）。
+
+
+
+### 1. Clone Source Code
+
+```bash
+git clone https://github.com/openwrt/openwrt/tree/openwrt-18.06
+cd openwrt-openwrt-18.06
+```
+
+   
+
+
+
+### 2. Install the LuCI Plugin
+
+#### LuCI - Rosy theme
+
+![](./images/screenshot.png)
+
+```bash
+nvim ./feeds.conf.default
+
+# Append LuCi source and save
+src-git rosy https://github.com/rosywrt/luci-theme-rosy.git;openwrt-18.06
+
+# Install packages definitions
+./scripts/feeds update luci
+./scripts/feeds install -a -p luci
+```
+
+   
+
+
+
+### 3. Config OpenWrt
+
+開啟OpenWrt編譯選單：
+
+```shell
+make menuconfig
+```
+
+- Target System &rarr; MediaTek Ralink MIPS
+- Subtarget &rarr; MT7621 based boards
+- Target Profile &rarr; Newifi D2
+- LuCI &rarr; Collections &rarr; luci
+- LuCI&rarr;Modules&rarr;Translations&rarr; Taiwanese (zh-tw)
+- LuCI&rarr;Applications&rarr;你想用的應用（如luci-app-aria2，luci-app-ddns，luci-app-adblock）
+
+​    
+
+​    
+
+### 4. Compile!
+
+```shell
+make download # just wait
+make -j4 # just wait again
+
+#The compiled firmware locate in 
+`bin/targets/ramips/mt7621/openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin`
+```
+
+編譯好後再用Breed Web Interface刷入固件。完成。
+
+
+
+
+

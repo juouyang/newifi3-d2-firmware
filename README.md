@@ -57,7 +57,7 @@ insmod ./newifi-d2-jail-break.ko
 
 
 
-5. 重啟後不用理，直接關電源。接下來要進入Breed刷機模式。進入方法為：關電的情況下長按住Router背面的`RESET`鍵打開電源，成功的話會看到所有LED會很快的閃動4下。訪問**http://192.168.1.1**進入Breed Web Interface。
+5. 重啟後不用理，直接關電源。接下來要進入Breed刷機模式。進入方法為：關電的情況下長按住Router背面的`RESET`鍵打開電源，成功的話會看到所有LED會很快的閃動4下。訪問 **http://192.168.1.1** 進入Breed Web Interface。
    ![](./images/breed.png)
 
 
